@@ -46,7 +46,6 @@ export class ImageDrop {
      */
     handlePaste(evt) {
         if (evt.clipboardData && evt.clipboardData.items && evt.clipboardData.items.length === 1) {
-            evt.preventDefault();
             this.readFiles(evt.clipboardData.items, dataUrl => {
                 // otherwise we wait until after the paste when this.quill.getSelection()
                 // will return a valid index
