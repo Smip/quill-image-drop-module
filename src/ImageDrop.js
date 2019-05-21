@@ -83,17 +83,17 @@ export class ImageDrop {
                 // Note that some file formats such as psd start with image/* but are not readable
                 return;
             }
+            // read the clipboard item or file
+            const blob = file.getAsFile ? file.getAsFile() : file;
             //check if the function was passed in options for handle img else past base64
             if (this.options.handler && typeof this.options.handler === "function") {
-                this.options.handler(file, callback);
+                this.options.handler(blob, callback);
             } else {
                 // set up file reader
                 const reader = new FileReader();
                 reader.onload = (evt) => {
                     callback(evt.target.result);
                 };
-                // read the clipboard item or file
-                const blob = file.getAsFile ? file.getAsFile() : file;
                 if (blob instanceof Blob) {
                     reader.readAsDataURL(blob);
                 }
