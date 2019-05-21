@@ -46,17 +46,11 @@ export class ImageDrop {
      */
     handlePaste(evt) {
         if (evt.clipboardData && evt.clipboardData.items && evt.clipboardData.items.length === 1) {
+            evt.preventDefault();
             this.readFiles(evt.clipboardData.items, dataUrl => {
-                const selection = this.quill.getSelection();
-                if (selection) {
-                    // we must be in a browser that supports pasting (like Firefox)
-                    // so it has already been placed into the editor
-                }
-                else {
-                    // otherwise we wait until after the paste when this.quill.getSelection()
-                    // will return a valid index
-                    setTimeout(() => this.insert(dataUrl), 0);
-                }
+                // otherwise we wait until after the paste when this.quill.getSelection()
+                // will return a valid index
+                setTimeout(() => this.insert(dataUrl), 0);
             });
         }
     }
